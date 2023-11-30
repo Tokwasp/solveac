@@ -19,6 +19,8 @@ public class PrinterQueue1966 {
         StringBuffer sb = new StringBuffer();
         int printNum = 0, target= 0, N = 0;
         N = Integer.parseInt(br.readLine());
+        Queue q = new LinkedList();
+
         for(int i=0; i<N; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
             printNum = Integer.parseInt(st.nextToken());
@@ -27,7 +29,16 @@ public class PrinterQueue1966 {
             st = new StringTokenizer(br.readLine());
             PriorityAndNum[] p = new PriorityAndNum[printNum];
             for(int j=0; j<printNum; j++) p[j] = new PriorityAndNum(j,Integer.parseInt(st.nextToken()));
+            Collections.addAll(q, p);
 
+            for(int j=0; j<q.size(); j++){
+                PriorityAndNum test = (PriorityAndNum)q.poll();
+                for(int k=0; k<q.size(); k++) {
+                    if(test.priority < p[k].priority){
+                        q.offer(test);
+                    }
+                }
+            }
         }
     }
 }
