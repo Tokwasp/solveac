@@ -5,40 +5,48 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-class PriorityAndNum{
-    int num = 0;
-    int priority = 0;
-    PriorityAndNum(int num, int priority){
-        this.num = num;
-        this.priority = priority;
-    }
-}
 public class PrinterQueue1966 {
+    public static class Priority{
+        int num = 0;
+        int priority = 0;
+        Priority(int num, int priority){
+            this.num = num;
+            this.priority = priority;
+        }
+    }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuffer sb = new StringBuffer();
-        int printNum = 0, target= 0, N = 0;
-        N = Integer.parseInt(br.readLine());
-        Queue q = new LinkedList();
+        int N = 0, targetIndex= 0, caseNum = 0, cnt = 0;
+        caseNum = Integer.parseInt(br.readLine());
 
-        for(int i=0; i<N; i++){
+        for(int i=0; i<caseNum; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            printNum = Integer.parseInt(st.nextToken());
-            target = Integer.parseInt(st.nextToken());
+            N = Integer.parseInt(st.nextToken());
+            targetIndex = Integer.parseInt(st.nextToken());
 
             st = new StringTokenizer(br.readLine());
-            PriorityAndNum[] p = new PriorityAndNum[printNum];
-            for(int j=0; j<printNum; j++) p[j] = new PriorityAndNum(j,Integer.parseInt(st.nextToken()));
-            Collections.addAll(q, p);
+            LinkedList<Priority> q = new LinkedList();
+            for(int j=0; j<N; j++) q.offer(new Priority(j,Integer.parseInt(st.nextToken())));
+            Priority target = q.get(targetIndex);
 
-            for(int j=0; j<q.size(); j++){
-                PriorityAndNum test = (PriorityAndNum)q.poll();
-                for(int k=0; k<q.size(); k++) {
-                    if(test.priority < p[k].priority){
-                        q.offer(test);
+            cnt = 0;
+            boolean complete = false;
+            while(!q.isEmpty()){
+                Priority poll = q.poll();
+                complete = true;
+                for(int j=0; j<q.size(); j++) {
+                    if(poll.priority < q.get(j).priority){
+                        q.offer(poll);
+                        complete = false;
+                        break;
                     }
                 }
+                if(complete) cnt++;
+                if(complete && poll.num == target.num) break;
             }
+            sb.append(cnt).append("\n");
         }
+        System.out.println(sb);
     }
 }
