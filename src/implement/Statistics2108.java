@@ -3,12 +3,11 @@ package implement;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import java.util.*;
 /*
    풀이 : 처음에 위치 index와 객체의 수를 표현하는 count를 포함하는 객체를 만들어 풀었는데
    정렬하는 과정에서 스트림을 사용하여 정렬을 하니 메모리가 너무많이 소모되었다.
+   컬렉션 공부중에 HashMap 으로도 풀수 있을것 같아서 풀어보았다.
 
    다른분 풀이 :
    정수의 절댓값은 4000이 넘지 않는 것을 이용 하여 + - 배열의 길이가 4001(0포함)인 배열을 만들었다.
@@ -32,8 +31,9 @@ public class Statistics2108 {
         Arrays.sort(arr);
         sb.append(arr[arr.length / 2]).append("\n");
 
+        /* int[] 배열 풀이
         //최빈값
-        int[] plus = new int[4002];
+        int[] plus = new int[4001];
         int[] minus = new int[4001];
         ArrayList maxList = new ArrayList();
 
@@ -55,6 +55,37 @@ public class Statistics2108 {
         }
         if(maxList.size() >= 2) sb.append(maxList.get(1)).append("\n");
         if(maxList.size() == 1) sb.append(maxList.get(0)).append("\n");
+        */
+
+        //HashMap 풀이
+        HashMap map = new HashMap();
+        for(int i=0; i<arr.length; i++) {
+            if (map.containsKey(arr[i])){
+                Integer value = (Integer)map.get(arr[i]);
+                map.put(arr[i], Integer.valueOf(value.intValue()+1));
+            }
+            else{
+                map.put(arr[i],Integer.valueOf(1));
+            }
+        }
+        Iterator it = map.entrySet().iterator();
+        int max = Integer.MIN_VALUE;
+        while(it.hasNext()){
+            Map.Entry e = (Map.Entry)it.next();
+            int value = ((Integer)e.getValue()).intValue();
+            max = Math.max(value,max);
+        }
+        it = map.entrySet().iterator();
+        ArrayList list = new ArrayList();
+        while(it.hasNext()){
+            Map.Entry e = (Map.Entry)it.next();
+            if((Integer)e.getValue() == max){
+                list.add(e.getKey());
+            }
+        }
+        Collections.sort(list);
+        if(list.size() >= 2) sb.append(list.get(1)).append("\n");
+        else sb.append(list.get(0)).append("\n");
 
         //범위
         sb.append(Math.abs(arr[0] - arr[arr.length-1]));
