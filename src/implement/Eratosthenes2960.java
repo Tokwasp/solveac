@@ -16,7 +16,7 @@ public class Eratosthenes2960 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        //Ex) n: 7 2~7까지 숫자 6개 입니다
+        //Ex) n: 7 2~7까지 숫자 6개
         int n = Integer.parseInt(st.nextToken()) - 1;
         int k = Integer.parseInt(st.nextToken());
 
@@ -31,14 +31,17 @@ public class Eratosthenes2960 {
             if(flag) break;
             if(arr[i] != 0) sosu = arr[i];
             for(int j=i; j<arr.length; j++){
-                if(arr[j] % sosu == 0){
+                if(arr[j] % sosu == 0 && arr[j] / sosu > 0 ){
                     result = arr[j];
                     arr[j] = 0;
                     count++;
-                    if(count == k) flag = true;
+                    if(count == k) {
+                        flag = true;
+                        break;
+                    }
                 }
             }
         }
-        System.out.println(result);
+        System.out.print(result);
     }
 }
