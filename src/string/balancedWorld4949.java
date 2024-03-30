@@ -16,6 +16,7 @@ public class balancedWorld4949 {
             Stack<Character> stack = new Stack<>();
 
             for(int i=0; i<input.length(); i++){
+
                 char ch = input.charAt(i);
 
                 if(ch == '(' || ch == '[') stack.push(ch);
