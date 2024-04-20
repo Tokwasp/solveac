@@ -45,7 +45,7 @@ public class MergeSort24060 {
                 k++;
             }
 
-            for(int i=copyStart; i<=copyEnd; i++) arr[i] = temp[i];
+            for(int i=0; i<=end; i++) if(temp[i] !=0) arr[i] = temp[i];
         }
     }
 
