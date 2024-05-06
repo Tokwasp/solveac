@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class MaxReward {
+
     static int max = 0;
     static int[] arr;
 
