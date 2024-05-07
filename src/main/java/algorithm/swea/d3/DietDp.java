@@ -38,6 +38,7 @@ public class DietDp{
                         d[i][j]=Math.max(d[i-1][j],d[i-1][j-cal[i]]+score[i]);
                 }
             }
+
 //            System.out.print("1번째 최대 칼로리 100 일때 점수: ");
 //            System.out.println(d[1][100]);
 //            System.out.print("2번째 최대 칼로리 200 일때 점수: ");
