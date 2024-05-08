@@ -3,6 +3,17 @@ package algorithm.swea.d3;
 import java.io.*;
 import java.util.stream.Stream;
 
+/*
+    문제 풀이 :
+    풀이 방법 : 구현
+
+    정답 이진수 코드의 길이 만큼의 문자 0을 넣어 초기화 한다.
+    ex) 정답 : "1000" -> 길이 4 -> myBinaryCode : "0000"
+    answerBinaryCode("1000") 과 myBinaryCode("0000")의 모든 요소를 비교 하여
+    다른 곳이 있다면 index, 정답 코드의 값을 가져와 myBinaryCode index 부터 뒤 집는다.
+    ex) ("1000") ("0000")은 0번째 index 숫자가 다르 므로 index : 0 change : 1
+    myBinaryCode ("1111")이 된다 그 후 같을때 까지 반복 한다.
+ */
 public class MemoryRecovery {
     static String myBinaryCode;
     static int[] myBinaryCodeArr;
