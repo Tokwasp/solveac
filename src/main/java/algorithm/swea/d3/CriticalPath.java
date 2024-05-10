@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class CriticalPath {
 
-    static boolean[][] visited;
+    static boolean[] visited;
     static ArrayList<ArrayList<Integer>> list;
     static int max = 0;
 
@@ -20,7 +20,7 @@ public class CriticalPath {
             int lineNum = sc.nextInt();
 
             list = new ArrayList<>();
-            visited = new boolean[nodeNum + 1][nodeNum + 1];
+            visited = new boolean[nodeNum + 1];
 
             for (int i = 0; i <= nodeNum; i++) {
                 list.add(new ArrayList<>());
@@ -34,7 +34,7 @@ public class CriticalPath {
             }
 
             for(int i = 1; i <= nodeNum; i++){
-                dfs(i,i,1);
+                dfs(i,1);
             }
 
             String st = "#" + t + " " + max;
@@ -44,18 +44,19 @@ public class CriticalPath {
         System.out.print(sb);
     }
 
-    static void dfs(int index, int start, int count){
+    static void dfs(int index, int count){
 
         if(max < count) max = count;
 
         int newCount = count + 1;
-        ArrayList<Integer> connectList = list.get(start);
+        ArrayList<Integer> connectList = list.get(index);
 
         for (int node : connectList) {
-            visited[index][start] = true;
-            if(!visited[index][node]) dfs(index,node,newCount);
-            visited[index][start] = false;
+            if(!visited[node]) {
+                visited[index] = true;
+                dfs(node, newCount);
+                visited[index] = false;
+            }
         }
-
     }
 }

@@ -5,10 +5,21 @@ import java.util.Scanner;
 /*
   문제 풀이 : dfs (백 트래킹)
 
-  실행 조건 :
   이진 트리 문제로 배열의 숫자를 포함 하는지 안 하는지 두 가지 경우로 DFS 실행 한다.
+
+  dfs(int index, int total) :
+  index : 배열의 arr[index]에 접근 , 종료 조건 체크
+  total : 현재 까지의 합
+
+  재귀 호출 조건 :
+  1. 배열의 숫자를 포함 하는 경우 , 2. 배열의 숫자를 포함 하지 않는 경우
+
+  count 증가 조건 :
+  total(현재 까지의 합) == K ( 찾는 수 )
+
   종료 조건 :
-  dfs(index,total)의 index가 배열의 크기와 같아 지거나, K <= total 일 경우 종료 한다.
+  1. dfs(index,total) 배열을 모두 탐색 한 경우 ex) 배열의 길이 5 , index : 5
+  2. total >= K ( >= 인 이유는 먼저 total == k를 확인 하기 때문)
 
  */
 public class SubsequenceSum {
