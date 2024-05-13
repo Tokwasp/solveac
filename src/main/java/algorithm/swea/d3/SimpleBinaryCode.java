@@ -3,6 +3,19 @@ package algorithm.swea.d3;
 import java.io.*;
 import java.util.stream.Stream;
 
+/*
+   문제 풀이 :
+
+   풀이 방법 : 구현
+
+   암호의 맨 뒷 자리는 모두 1이다.
+   배열에 값을 넣고, row 뒤에서 부터 접근 하여 1인 위치를 찾는다.
+   StringBuilder 를 사용 하여 (해당 위치 - 6) 부터 7개를 append 하고 String을 만든다.(sb.toString())
+   암호와 일치 하는 것을 찾고 해당 암호를 result[index]에 넣는다. (index 초기값 : 7)
+   재귀 호출을 위한 정보를 바꾸고, (해당 위치 - 7, index--)
+   index != 0 까지 재귀 호출 하여 8개의 암호 배열을 채운다.
+
+ */
 public class SimpleBinaryCode {
     static String arr[][];
     static int result[];
