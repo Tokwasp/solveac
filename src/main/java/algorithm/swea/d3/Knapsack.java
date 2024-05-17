@@ -19,9 +19,9 @@ public class Knapsack {
             int[][] dp = new int[N + 1][K + 1];
 
             for(int i = 1; i <= N; i++) {
-                int[] boopieAndPrice = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-                size[i] = boopieAndPrice[0];
-                price[i] = boopieAndPrice[1];
+                int[] sizeAndPrice = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+                size[i] = sizeAndPrice[0];
+                price[i] = sizeAndPrice[1];
                 dp[i][size[i]] = price[i];
             }
 
