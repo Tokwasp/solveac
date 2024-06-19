@@ -1,4 +1,4 @@
-package algorithm.baekjoon;
+package algorithm.baekjoon.binarysearch;
 
 import java.io.*;
 
