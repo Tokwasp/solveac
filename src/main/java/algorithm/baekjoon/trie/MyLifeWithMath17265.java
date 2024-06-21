@@ -1,4 +1,4 @@
-package algorithm.baekjoon;
+package algorithm.baekjoon.trie;
 
 import java.io.*;
 import java.util.HashSet;
@@ -36,9 +36,9 @@ public class MyLifeWithMath17265 {
         System.out.println(max + " " + min);
     }
 
-    static void dfs(int row, int col, char unsan, int total) {
+    static void dfs(int row, int col, char operator, int total) {
         char present = map[row][col];
-        char newUnsan = unsan;
+        char newUnsan = operator;
         int newTotal = total;
 
         if(numSet.contains(present)){
