@@ -17,23 +17,24 @@ public class BalloonFit11509 {
         int arrow = 0;
         // arr 크기 만큼 반복
         for(int i = 0; i < N; i++){
+            int heightArrow = arr[i];
+            int nextHeightArrow = arr[i] - 1;
 
             // 해당 풍선을 쏠 수 있을 경우
-            if(map.containsKey(arr[i])){
-                int remainArrowCount = map.get(arr[i]) - 1;
-                int nextArrow = arr[i] - 1;
+            if(map.containsKey(heightArrow)){
+                int heightArrowCount = map.get(heightArrow) - 1;
 
-                if(remainArrowCount == 0) {
-                    map.remove(arr[i]);
+                if(heightArrowCount == 0) {
+                    map.remove(heightArrow);
                 }
-                else map.put(arr[i], remainArrowCount);
+                else map.put(heightArrow, heightArrowCount);
 
-                boolean error = nextArrow < 1;
-                if(!error) map.put(nextArrow, map.getOrDefault(nextArrow, 0) + 1);
+                boolean error = nextHeightArrow < 1;
+                if(!error) map.put(nextHeightArrow, map.getOrDefault(nextHeightArrow, 0) + 1);
             }
             // 풍선을 쏠 수 없는 경우
             else{
-                map.put(arr[i] - 1, map.getOrDefault(arr[i] - 1, 0) + 1);
+                if(nextHeightArrow >= 1) map.put(nextHeightArrow, map.getOrDefault(nextHeightArrow, 0) + 1);
                 arrow += 1;
             }
         }
