@@ -18,12 +18,13 @@ public class WidthSearch24445 {
         int R = Integer.parseInt(st.nextToken());
         visited = new boolean[N + 1]; position = new int[N + 1];
 
-        // 그래프 양방향 노드 넣기
+        // 그래프 연결 리스트 넣기
         graph = new ArrayList<>();
         for(int i = 0 ; i <= N; i++){
             graph.add(new ArrayList<>());
         }
 
+        //
         for(int i = 1; i <= M; i++){
             int[] startEndNode = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             int startNode = startEndNode[0]; int endNode = startEndNode[1];
@@ -53,14 +54,21 @@ public class WidthSearch24445 {
         while(!q.isEmpty()){
             int start = q.poll();
 
+            // ex) 1번 노드와 연결된 정보를 담고 있는 리스트 반환
             List<Integer> targetList = graph.get(start);
 
+            // 리스트 크기 만큼 반복
             for(int i = 0; i < targetList.size(); i++){
                 int targetNode = targetList.get(i);
 
+                //방문 하지 않은 노드 일 경우
                 if(!visited[targetNode]){
+
+                    // 방문 순서 +1
                     num += 1;
+                    // 방문 처리
                     visited[targetNode] = true;
+                    // 현재 노드의 방문 순서 업데이트
                     position[targetNode] = num;
                     q.add(targetNode);
                 }
