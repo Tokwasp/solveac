@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.baekjoon.graph;
 
 import java.io.*;
 import java.util.*;

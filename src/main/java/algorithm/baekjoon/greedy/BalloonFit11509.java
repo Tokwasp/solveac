@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.baekjoon.greedy;
 
 import java.io.*;
 import java.util.*;
