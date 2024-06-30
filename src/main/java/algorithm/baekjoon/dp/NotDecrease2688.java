@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.baekjoon.dp;
 
 import java.io.*;
 import java.util.Arrays;
