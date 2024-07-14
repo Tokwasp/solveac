@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.baekjoon.simulation;
 
 import java.io.*;
 import java.util.stream.Stream;
