@@ -75,11 +75,10 @@ public class AGreatWay16167 {
                     dist[v] = dist[u] + graph[u][v];
                     pq.add(new int[] {dist[v], v, curr[2] + 1});
                     position[v] = curr[2] + 1;
-                    continue;
                 }
 
                 //최단 거리 갱신 하지 못 했지만 거리가 같은 경우
-                if(graph[u][v] != 0 && graph[u][v] != INF && dist[v] == dist[u] + graph[u][v]){
+                if(graph[u][v] != INF && dist[v] == dist[u] + graph[u][v]){
                     position[v] = Math.min(position[v], curr[2] + 1);
                 }
             }
