@@ -1,4 +1,4 @@
-package algorithm.baekjoon;
+package algorithm.baekjoon.graph;
 
 import java.io.*;
 import java.util.*;
@@ -26,6 +26,45 @@ public class SnakeBridgeGame16928 {
 
         dfs(1,0);
         System.out.println(rollCount[100]);
+
+        bfs();
+
+    }
+
+    static void bfs(){
+        boolean[] visited = new boolean[101];
+        visited[1] = true;
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {1,0});
+
+        boolean pass = false;
+
+        while(!q.isEmpty()){
+            int[] poll = q.poll();
+            int index = poll[0];
+            int rollCount = poll[1];
+
+            if(index == 100){
+                System.out.print(rollCount);
+                pass = true;
+            }
+
+            if(pass) return;
+
+            for(int i = 1; i <= 6; i++){
+                int nextIndex = index + i;
+                if(nextIndex > 100 || visited[nextIndex]) continue;
+
+                if(map.get(nextIndex) != null){
+                    q.add(new int[]{map.get(nextIndex), rollCount + 1});
+                }
+                else {
+                    q.add(new int[]{nextIndex, rollCount + 1});
+                }
+
+                visited[nextIndex] = true;
+            }
+        }
     }
 
     static void dfs(int idx, int count){
