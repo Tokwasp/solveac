@@ -1,20 +1,12 @@
 package algorithm.baekjoon.implement;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class decimalSum1644 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-
-        if(N == 2) {
-            System.out.println(1);
-            return;
-        }
 
         List<Integer> decimalList = new ArrayList<>();
 
@@ -38,20 +30,19 @@ public class decimalSum1644 {
         int sum = 0;
         int count = 0;
 
-        while(end < decimalArr.length){
+        while(end <= decimalArr.length){
             if(sum < N){
+                if(end == decimalArr.length) break;
                 sum += decimalArr[end++];
             }
-            else{
-                sum -= decimalArr[start++];
-            }
-            if(sum == N) {
+            else if(sum == N){
                 count++;
                 sum -= decimalArr[start++];
             }
+            else {
+                sum -= decimalArr[start++];
+            }
         }
-        if(decimalArr.length > 0 && decimalArr[--end] == N) count++;
-
         System.out.println(count);
     }
 }
