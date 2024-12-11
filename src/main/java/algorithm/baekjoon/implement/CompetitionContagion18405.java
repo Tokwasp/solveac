@@ -8,15 +8,14 @@ public class CompetitionContagion18405 {
     private static int[] dx = {-1, 1, 0, 0};
     private static int[] dy = {0, 0, -1, 1};
     private static int[][] map;
-    private static int N,K;
+    private static int K;
     private static List<Queue<int[]>> contagionCoordinate;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
-
+        int[] nAndK = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int N = nAndK[0];
+        K = nAndK[1];
         map = new int[N][N];
         contagionCoordinate = new ArrayList<>();
 
@@ -27,7 +26,7 @@ public class CompetitionContagion18405 {
 
         // 맵 입력
         for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
             for (int j = 0; j < N; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
