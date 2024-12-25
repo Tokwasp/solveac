@@ -1,8 +1,6 @@
 package algorithm.baekjoon.math;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class AmazingDecimal2023 {
     static int start, end;
@@ -20,7 +18,7 @@ public class AmazingDecimal2023 {
 
     private static void dfs(int num, int N) {
         if(N == 0){
-            if(isDecimal(num) && start <= num && num < end) {
+            if(start <= num && num < end) {
                 sb.append(num).append("\n");
             }
             return;
