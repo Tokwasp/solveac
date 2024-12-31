@@ -4,25 +4,21 @@ import java.io.*;
 import java.util.*;
 
 public class DecimalRoute1963 {
-    static List<Integer> decimalList;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int testCase = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
 
-        decimalList = new ArrayList<>();
-        int maxTarget = 9999;
-
-        int[] decimalArr = new int[10000];
-        for(int i = 0; i < decimalArr.length; i++){
-            decimalArr[i] = i;
+        int maxValue = 9999;
+        int[] decimal = new int[10000];
+        for(int i = 0; i < decimal.length; i++){
+            decimal[i] = i;
         }
 
-        for(int i = 2; i <= maxTarget; i++){
-            if(decimalArr[i] != 0) {
-                for(int j = i * i; j <= maxTarget; j += i){
-                    decimalArr[j] = 0;
+        for(int i = 2; i <= maxValue; i++){
+            if(decimal[i] != 0) {
+                for (int j = i * i; j <= maxValue; j += i) {
+                    decimal[j] = 0;
                 }
             }
         }
@@ -32,37 +28,48 @@ public class DecimalRoute1963 {
             int A = Integer.parseInt(st.nextToken());
             int B = Integer.parseInt(st.nextToken());
 
-            Queue<Integer> queue = new ArrayDeque<>();
+            Queue<int[]> queue = new ArrayDeque<>();
+            queue.add(new int[]{A, 0});
             boolean[] visited = new boolean[10000];
-            int[] count = new int[10000];
-            
-            queue.add(A);
             visited[A] = true;
+            boolean pass = false;
 
             while(!queue.isEmpty()){
-                int num = queue.poll();
+                int[] cur = queue.poll();
+                int num = cur[0];
+                int change = cur[1];
+
+                // 탈출 조건
+                if(num == B){
+                    sb.append(change).append("\n");
+                    pass = true;
+                    break;
+                }
+
                 for(int i = 0; i < 4; i++){
                     for(int j = 0; j <= 9; j++){
                         if(i == 0 && j == 0){
                             continue;
                         }
-                        int k = change(num, i, j);
-                        if(decimalArr[k] != 0 && !visited[k]){
-                            queue.add(k);
-                            visited[k] = true;
-                            count[k] = count[num] + 1;
+
+                        int next = change(num, i, j);
+                        if(!visited[next] && decimal[next] != 0){
+                            queue.add(new int[] {next, change + 1});
+                            visited[next] = true;
                         }
                     }
                 }
             }
-            sb.append(count[B]).append("\n");
+            if(!pass){
+                sb.append("impossible").append("\n");
+            }
         }
         System.out.print(sb);
     }
 
-    private static int change(int num, int i, int j) {
+    private static int change(int num, int index, int changNum){
         StringBuilder sb = new StringBuilder(String.valueOf(num));
-        sb.setCharAt(i, (char) (j + '0'));
+        sb.setCharAt(index, String.valueOf(changNum).charAt(0));
         return Integer.parseInt(sb.toString());
     }
 }
