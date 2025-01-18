@@ -28,13 +28,13 @@ public class LCS9252 {
             int y = s2.length();
 
             while (x > 0 && y > 0) {
-                if (s1.charAt(x - 1) == s2.charAt(y - 1)) {
+                if(dp[x][y] == dp[x-1][y]){
+                    x--;
+                } else if(dp[x][y] == dp[x][y-1]){
+                    y--;
+                } else{
                     sb.append(s1.charAt(x - 1));
                     x--;
-                    y--;
-                } else if (dp[x - 1][y] >= dp[x][y - 1]) {
-                    x--;
-                } else {
                     y--;
                 }
             }
