@@ -9,7 +9,6 @@ public class MovePerson16234 {
     static int N = 0, R = 0, L = 0;
     static int[][] map;
     static boolean[][] visited;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
