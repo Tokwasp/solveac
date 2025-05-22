@@ -6,7 +6,7 @@ public class ArcheryCompetition {
     private static int[] result;
 
     private static int arrowCount;
-    private static int maxDiff = Integer.MIN_VALUE;
+    private static int maxDiff = 0;
 
     public int[] solution(int arrowCount, int[] apeachInfo) {
         this.apeachInfo = apeachInfo;
@@ -17,11 +17,11 @@ public class ArcheryCompetition {
 
         dfs(0, 0);
 
-        return maxDiff <= 0 ? new int[]{-1} : result;
+        return maxDiff == 0 ? new int[]{-1} : result;
     }
 
     private static void dfs(int depth, int shootCount) {
-        if (depth == 11) {
+        if (depth == 10) {
             rionInfo[10] += arrowCount - shootCount;
 
             int diff = getDiff();
