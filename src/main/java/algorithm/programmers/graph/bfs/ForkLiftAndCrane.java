@@ -51,11 +51,11 @@ public class ForkLiftAndCrane {
     private static int outsideRemoveBlock(char removeBlock) {
         boolean[][] visited = new boolean[blocks.length][blocks[0].length];
         Queue<int[]> sideCheckQueue = new LinkedList<>();
-        Queue<int[]> removeBlockQueue = new LinkedList<>();
 
         sideCheckQueue.add(new int[]{0, 0});
         visited[0][0] = true;
 
+        int removeBlockCount = 0;
         while (!sideCheckQueue.isEmpty()) {
             int[] dots = sideCheckQueue.poll();
             int row = dots[0];
@@ -72,20 +72,12 @@ public class ForkLiftAndCrane {
                 }
 
                 if (blocks[nextRow][nextCol] == removeBlock) {
-                    removeBlockQueue.add(new int[]{nextRow, nextCol});
+                    blocks[nextRow][nextCol] = BLANK_BLOCK;
+                    removeBlockCount++;
                 }
 
                 visited[nextRow][nextCol] = true;
             }
-        }
-
-        int removeBlockCount = removeBlockQueue.size();
-        while (!removeBlockQueue.isEmpty()) {
-            int[] blockDot = removeBlockQueue.poll();
-            int row = blockDot[0];
-            int col = blockDot[1];
-
-            blocks[row][col] = BLANK_BLOCK;
         }
         return removeBlockCount;
     }
@@ -93,23 +85,19 @@ public class ForkLiftAndCrane {
     private static int anyMatchBlockRemoveBlock(char removeBlock) {
         Queue<int[]> removeBlockQueue = new LinkedList<>();
 
+        int removeBlockCount = 0;
         for (int row = 1; row < blocks.length - 1; row++) {
             for (int col = 1; col < blocks[0].length - 1; col++) {
                 char block = blocks[row][col];
-                if (block == BLANK_BLOCK || block != removeBlock) continue;
+                if (block == BLANK_BLOCK) continue;
 
-                removeBlockQueue.add(new int[]{row, col});
+                if (block == removeBlock) {
+                    blocks[row][col] = BLANK_BLOCK;
+                    removeBlockCount++;
+                }
             }
         }
 
-        int removeBlockCount = removeBlockQueue.size();
-        while (!removeBlockQueue.isEmpty()) {
-            int[] blockDot = removeBlockQueue.poll();
-            int row = blockDot[0];
-            int col = blockDot[1];
-
-            blocks[row][col] = BLANK_BLOCK;
-        }
         return removeBlockCount;
     }
 
