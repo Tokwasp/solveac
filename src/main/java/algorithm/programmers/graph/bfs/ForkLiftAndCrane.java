@@ -83,8 +83,6 @@ public class ForkLiftAndCrane {
     }
 
     private static int anyMatchBlockRemoveBlock(char removeBlock) {
-        Queue<int[]> removeBlockQueue = new LinkedList<>();
-
         int removeBlockCount = 0;
         for (int row = 1; row < blocks.length - 1; row++) {
             for (int col = 1; col < blocks[0].length - 1; col++) {
