@@ -9,11 +9,11 @@ public class FindPrime {
 
     public int solution(String input) {
         visited = new boolean[input.length()];
-        permutation(input, 0);
+        permutation(input);
         return set.size();
     }
 
-    private static void permutation(String input, int depth) {
+    private static void permutation(String input) {
         primeCheck();
 
         // 순열
@@ -21,7 +21,7 @@ public class FindPrime {
             if (!visited[i]) {
                 visited[i] = true;
                 numbers.add(input.charAt(i));
-                permutation(input, depth + 1);
+                permutation(input);
                 numbers.remove(numbers.size() - 1);
                 visited[i] = false;
             }
