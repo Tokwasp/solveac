@@ -39,11 +39,6 @@ public class FindPrime {
         if (num == 0) return;
         if (num == 1) return;
 
-        // 이미 포함된 소수인 경우 제외
-        if (set.contains(num)) {
-            return;
-        }
-
         // 소수 판별
         for (int i = 2; i <= sqrt; i++) {
             if (num % i == 0) {
