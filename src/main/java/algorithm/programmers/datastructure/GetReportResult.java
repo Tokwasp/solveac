@@ -9,12 +9,14 @@ public class GetReportResult {
     public int[] solution(String[] idList, String[] reports, int limit) {
         Set<String> idSet = new HashSet<>();
         Map<String, Set<String>> reportMap = new HashMap<>();
+        Map<String, Integer> indexMap = new HashMap<>();
 
         // 이름자 id 정리
         for (int i = 0; i < idList.length; i++) {
             String id = idList[i];
             idSet.add(id);
             reportMap.put(id, new HashSet<>());
+            indexMap.put(id, i);
         }
 
         // 신고 하기
@@ -42,18 +44,11 @@ public class GetReportResult {
             // 메일 전송 대상
             if (reporterSet.size() >= limit) {
                 for (String reporter : reporterSet) {
-                    int index = findIndexOf(idList, reporter);
+                    int index = indexMap.get(reporter);
                     mailArr[index] += 1;
                 }
             }
         }
         return mailArr;
-    }
-
-    private static int findIndexOf(String[] idList, String id) {
-        for (int i = 0; i < idList.length; i++) {
-            if (idList[i].equals(id)) return i;
-        }
-        return -1;
     }
 }
