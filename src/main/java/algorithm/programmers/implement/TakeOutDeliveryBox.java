@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TakeOutDeliveryBox {
-    public int solution(int boxCount, int rowLength, int target) {
+    public int solution(int boxCount, int colLength, int target) {
         // 박스 인덱스 찾기
-        int targetRow = (target - 1) / rowLength;
+        int targetRow = (target - 1) / colLength;
 
-        int remain = (target - 1) % rowLength;
-        int targetCol = targetRow % 2 == 0 ? remain : rowLength - 1 - remain;
+        int remain = (target - 1) % colLength;
+        int targetCol = targetRow % 2 == 0 ? remain : colLength - 1 - remain;
 
         // 다음 층으로 올라가기 위해서 번호를 얼만큼 더해야 하는가?
         List<Integer> sumList = new ArrayList<>();
         int initNum = 1;
         sumList.add(initNum);
 
-        for (int i = 1; i < rowLength; i++) {
+        for (int i = 1; i < colLength; i++) {
             initNum += 2;
             sumList.add(initNum);
         }
@@ -29,7 +29,7 @@ public class TakeOutDeliveryBox {
             if (row % 2 == 1) {
                 target += sumList.get(targetCol);
             } else {
-                target += sumList.get(rowLength - 1 - targetCol);
+                target += sumList.get(colLength - 1 - targetCol);
             }
             row++;
             count++;
