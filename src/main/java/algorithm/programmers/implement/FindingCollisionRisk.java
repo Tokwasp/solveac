@@ -68,7 +68,6 @@ public class FindingCollisionRisk {
 
                 if (robot.isDestination(nextDestination)) {
                     robot.points.remove(0);
-                    ;
                 }
 
                 if (robot.points.isEmpty()) {
