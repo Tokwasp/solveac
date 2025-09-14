@@ -46,4 +46,37 @@ public class FeatureDevelopment {
         }
         return list.stream().mapToInt(Integer::intValue).toArray();
     }
+
+    // 작업 남은 일수를 큐에 넣는법
+    public int[] solution2(int[] progresses, int[] speeds) {
+        Queue<Integer> queue = new LinkedList<>();
+
+        // 입력
+        for(int i = 0; i < progresses.length; i++){
+            int remainProgress = 100 - progresses[i];
+            int speed = speeds[i];
+            int day = remainProgress / speed;
+
+            if(remainProgress % speed != 0){
+                day++;
+            }
+            queue.add(day);
+        }
+
+        List<Integer> list = new ArrayList<>();
+
+        // 작업 실행
+        while(!queue.isEmpty()){
+            int day = queue.poll();
+            int count = 1;
+
+            while(!queue.isEmpty() && queue.peek() <= day){
+                queue.poll();
+                count++;
+            }
+            list.add(count);
+        }
+
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    }
 }
