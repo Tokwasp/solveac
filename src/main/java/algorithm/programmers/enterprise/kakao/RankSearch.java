@@ -101,4 +101,90 @@ public class RankSearch {
         }
         return scores.size() - start;
     }
+
+    private String[] remember;
+
+    public int[] solution2(String[] infos, String[] queries) {
+        queryScoreMap = new HashMap<>();
+
+        for(int i = 0; i < infos.length; i++){
+            String[] input = infos[i].split(" ");
+
+            remember = new String[4];
+            findCombination(input, 0, remember.length);
+        }
+
+        for(Map.Entry<String, List<Integer>> entry :queryScoreMap.entrySet()){
+            List<Integer> scores = entry.getValue();
+            scores.sort(Comparator.naturalOrder());
+        }
+
+        int[] result = new int[queries.length];
+        for(int i = 0; i < queries.length; i++){
+            String[] input = queries[i].replace(" and ", " ").split(" ");
+
+            StringBuilder sb = new StringBuilder();
+            for(int index = 0; index < input.length - 1; index++){
+                sb.append(input[index]);
+            }
+
+            String query = sb.toString();
+            if(queryScoreMap.get(query) == null){
+                result[i] = 0;
+                continue;
+            }
+
+            List<Integer> scores = queryScoreMap.get(query);
+            int minScore = Integer.parseInt(input[input.length - 1]);
+            result[i] = getEqualsOrOverScore(scores, minScore);
+        }
+
+        return result;
+    }
+
+    private void findCombination(String[] input, int depth, int targetDepth){
+        if(depth == targetDepth){
+            String query = getQueryString();
+
+            if(queryScoreMap.get(query) == null){
+                queryScoreMap.put(query, new ArrayList<>());
+            }
+
+            List<Integer> scores = queryScoreMap.get(query);
+            int score = Integer.parseInt(input[targetDepth]);
+            scores.add(score);
+            return;
+        }
+
+        remember[depth] = input[depth];
+        findCombination(input, depth + 1, targetDepth);
+
+        remember[depth] = "-";
+        findCombination(input, depth + 1, targetDepth);
+    }
+
+    private String getQueryString(){
+        StringBuilder sb = new StringBuilder();
+        for(String str: remember){
+            sb.append(str);
+        }
+        return sb.toString();
+    }
+
+    private int getEqualsOrOverScore(List<Integer> scores, int minScore){
+        int start = 0;
+        int end = scores.size() - 1;
+
+        while(start <= end){
+            int mid = (start + end) / 2;
+            int curScore = scores.get(mid);
+
+            if(minScore <= curScore){
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return scores.size() - start;
+    }
 }
